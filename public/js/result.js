@@ -60,7 +60,7 @@ const update = (row, data) => {
     if(main && secondary && save && discard && del && firstName && lastName && address && shirts && jackets && hats){
         // console.log("now to switch")
         //switches which div is displayed onscreen
-        console.log(data)
+        // console.log(data)
 
         //makes the switch onscreen
         const temp = main.getAttribute("style") //original style
@@ -120,7 +120,8 @@ const update = (row, data) => {
                 method: "PUT",
                 body: body,
             }).then((response)=>{
-                console.log(response)
+                // console.log(response)
+                window.location.reload()
             })
         }
         //gives the delete button its functionality which is to have the server delete the row, and then reload the page
@@ -141,7 +142,8 @@ const update = (row, data) => {
                 method: "DELETE",
                 body: body,
             }).then((response)=>{
-                console.log(response)
+                // console.log(response)
+                window.location.reload()
             })
         }
 

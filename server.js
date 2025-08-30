@@ -1,85 +1,82 @@
-const http = require('http')
-const fs = require('fs')
-const port = process.env.PORT || 3000
+const http = require('http'),
+    fs   = require('fs'),
+    port = 3000;
 
-let shifts = [] // store all shift entries
+let shifts = [];
+let nextId = 1;
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'GET') {
-    // Serve static files
-    switch (req.url) {
-      case '/':
-      case '/index.html':
-        return sendFile(res, 'index.html', 'text/html')
-      case '/style.css':
-        return sendFile(res, 'style.css', 'text/css')
-      case '/script.js':
-        return sendFile(res, 'script.js', 'application/javascript')
-      case '/results':
-        // return JSON dataset
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(shifts))
-        break
-      default:
-        res.writeHead(404)
-        res.end('404 Error: File Not Found')
-    }
-  } else if (req.method === 'POST') {
-    // Handle form submissions (adding new shifts)
-    if (req.url === '/add') {
-      let body = ''
-      req.on('data', chunk => (body += chunk.toString()))
-      req.on('end', () => {
-        const data = JSON.parse(body)
-
-        // compute derived field
-        const hours = parseFloat(data.hours)
-        const tips = parseFloat(data.tips)
-        const rate = hours > 0 ? (tips / hours).toFixed(2) : '0.00'
-
-        // build row with derived field + ID
-        const newShift = {
-          id: shifts.length + 1,
-          restaurant: data.restaurant,
-          hours,
-          tips,
-          rate,
-          when: new Date().toLocaleString()
-        }
-
-        shifts.push(newShift)
-
-        // return updated data
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(shifts))
-      })
-    } else if (req.url === '/delete') {
-      let body = ''
-      req.on('data', chunk => (body += chunk.toString()))
-      req.on('end', () => {
-        const { id } = JSON.parse(body)
-        shifts = shifts.filter(s => s.id !== id)
-
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(shifts))
-      })
-    }
+  if (req.method === 'GET' && req.url === '/') {
+    sendFile(res, 'index.html');
+  } else if (req.method === 'GET' && req.url === '/style.css') {
+    sendFile(res, 'style.css', 'text/css');
+  } else if (req.method === 'GET' && req.url === '/script.js') {
+    sendFile(res, 'script.js', 'application/javascript');
+  } else if (req.url.startsWith('/api/shifts')) {
+    handleAPI(req, res);
+  } else {
+    res.writeHead(404);
+    res.end('404 Not Found');
   }
-})
+});
 
-server.listen(port, () => console.log(`Server running on http://localhost:${port}`))
+server.listen(process.env.PORT || port);
 
-// Utility: serve static files
-function sendFile(res, filename, type) {
+function sendFile(res, filename, contentType = 'text/html') {
   fs.readFile(filename, (err, content) => {
     if (err) {
-      res.writeHead(500)
-      res.end('Server Error')
+      res.writeHead(500);
+      res.end('Error loading file');
     } else {
-      res.writeHead(200, { 'Content-Type': type })
-      res.end(content, 'utf-8')
+      res.writeHead(200, { 'Content-Type': contentType });
+      res.end(content);
     }
-  })
+  });
 }
 
+function handleAPI(req, res) {
+  const urlParts = req.url.split('/');
+  const id = urlParts[3] ? parseInt(urlParts[3]) : null;
 
+  if (req.method === 'GET' && req.url === '/api/shifts') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(shifts));
+  } else if (req.method === 'GET' && id) {
+    const shift = shifts.find(s => s.id === id);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(shift));
+  } else if (req.method === 'POST' && req.url === '/api/shifts') {
+    collectRequestData(req, result => {
+      const rate = result.tips / result.hours;
+      const shift = { id: nextId++, ...result, rate, when: new Date().toLocaleString() };
+      shifts.push(shift);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(shift));
+    });
+  } else if (req.method === 'PUT' && id) {
+    collectRequestData(req, result => {
+      const shift = shifts.find(s => s.id === id);
+      if (shift) {
+        shift.restaurant = result.restaurant;
+        shift.hours = result.hours;
+        shift.tips = result.tips;
+        shift.rate = result.tips / result.hours;
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(shift));
+      } else {
+        res.writeHead(404);
+        res.end('Not found');
+      }
+    });
+  } else if (req.method === 'DELETE' && id) {
+    shifts = shifts.filter(s => s.id !== id);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+  }
+}
+
+function collectRequestData(req, callback) {
+  let body = '';
+  req.on('data', chunk => (body += chunk.toString()));
+  req.on('end', () => callback(JSON.parse(body)));
+}

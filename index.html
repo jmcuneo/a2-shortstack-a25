@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Shift Tracker</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1>Shift Tracker</h1>
+</header>
+
+<section id="form-section">
+    <h2>Add a Shift</h2>
+    <form id="shiftForm">
+        <input type="text" id="restaurant" placeholder="Restaurant" required>
+        <input type="number" id="hours" placeholder="Hours worked" required>
+        <input type="number" id="tips" placeholder="Tips earned" required>
+        <button type="submit">Add Shift</button>
+    </form>
+</section>
+
+<section id="results-section">
+    <h2>All Shifts</h2>
+    <table id="resultsTable">
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Hours</th>
+            <th>Tips</th>
+            <th>$ / Hour (Derived)</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

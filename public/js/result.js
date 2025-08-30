@@ -87,7 +87,7 @@ const update = (row, data) => {
         jackets.setAttribute("value",data.jackets)
         hats.setAttribute("value",data.hats)
         //gives the save button its functionality which is to have the server update the data, and then reloads the page
-        save.onclick = () => {
+        save.onclick = async () => {
             //makes it so that the user cannot edit fields while saving
             firstName.disabled = true
             lastName.disabled = true
@@ -95,18 +95,36 @@ const update = (row, data) => {
             shirts.disabled = true
             jackets.disabled = true
             hats.disabled = true
-            console.log(
-            firstName.value,
-            lastName.value,
-            address.value,
-            shirts.value,
-            jackets.value,
-            hats.value)
-            //Uses PUT request to update table
+            // console.log(
+            // firstName.value,
+            // lastName.value,
+            // address.value,
+            // shirts.value,
+            // jackets.value,
+            // hats.value)
+            //creates body for http request
+            const body = JSON.stringify( {
+                "row":row,
+                "data": {
+                        "firstName":firstName.value,
+                        "lastName":lastName.value,
+                        "address":address.value,
+                        "shirts":shirts.value,
+                        "jackets":jackets.value,
+                        "hats":hats.value,
+                }
 
+            })
+            //Uses PUT request to update table
+            await fetch("/results", {
+                method: "PUT",
+                body: body,
+            }).then((response)=>{
+                console.log(response)
+            })
         }
         //gives the delete button its functionality which is to have the server delete the row, and then reload the page
-        del.onclick = () => {
+        del.onclick = async () => {
             //makes it so that the user cannot edit fields while deleting
             firstName.disabled = true
             lastName.disabled = true
@@ -114,8 +132,17 @@ const update = (row, data) => {
             shirts.disabled = true
             jackets.disabled = true
             hats.disabled = true
-            //Uses DELETE request to delete row
-
+            //creates body for http request
+            const body = JSON.stringify( {
+                "row":row,
+            })
+            //Uses DELETE request to update table
+            await fetch("/results", {
+                method: "DELETE",
+                body: body,
+            }).then((response)=>{
+                console.log(response)
+            })
         }
 
     }

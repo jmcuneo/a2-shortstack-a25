@@ -20,8 +20,134 @@ const server = http.createServer( function( request,response ) {
     handleGet( request, response )    
   }else if( request.method === "POST" ){
     handlePost( request, response ) 
+  } else if( request.method === "PUT" ){
+      if(checkDestination( request, response , "public/results")){
+          handlePut( request, response )
+          console.log("handled put request")
+      }
+      else{
+          console.log("did not handle put request")
+          response.writeHead( 400);
+          response.end();
+      }
+  }
+  else if( request.method === "DELETE" ){
+      if(checkDestination( request, response , "public/results")){
+          handleDelete( request, response )
+          console.log("handled delete request")
+      }
+      else{
+          console.log("did not handle delete request")
+          response.writeHead( 400);
+          response.end();
+      }
   }
 })
+/*
+Checks to make sure the destination is correct for the specified action, and returns true if it is
+*/
+const checkDestination = ( request, response, destination) => {
+    const filename = dir + request.url.slice( 1 );
+    //handles the case when the client is updating the appdata
+    return filename === destination;
+}
+/*
+Updates the appdata by replacing the row specified in the json with the data specified in the json
+ */
+const handlePut = ( request, response ) => {
+    console.log("Function called")
+    let dataString = ""
+
+    request.on( "data", function( data ) {
+        dataString += data
+    })
+
+    request.on( "end", function() {
+        try {
+            const body = JSON.parse(dataString)
+            const keys = Object.keys(body)
+            // console.log("keys:" + keys)
+            //first check to make sure that json is formatted correctly
+            if (keys.length === 2) {
+                // console.log("passed check 1")
+                //second check to make sure that json is formatted correctly
+                if (keys[0] === "row" && keys[1] === "data") {
+                    // console.log("passed check 2")
+                    //extracting values from json
+                    const row = parseInt(body[keys[0]])
+                    const data = body[keys[1]]
+                    console.log("data:", data)
+                    //third check to make sure that json is formatted correctly
+                    if (row < appdata.length - 1) {
+                        // console.log("passed check 3")
+                        //final check to make sure that json is formatted correctly
+                        if (correctDataFormat(data)) {
+                            // console.log("passed check 4")
+                            // console.log("replacing data")
+                            //replacing values in appdata and recalculates final price
+                            appdata[row].firstName = data.firstName;
+                            appdata[row].lastName = data.lastName;
+                            appdata[row].address = data.address;
+                            appdata[row].shirts = data.shirts;
+                            appdata[row].jackets = data.jackets;
+                            appdata[row].hats = data.hats;
+                            appdata[row].totalPrice = data.shirts * 15 + data.jackets * 35 + data.hats * 5;
+                            //sending response indicating operation was successful
+                            // console.log(appdata)
+                            response.writeHead( 200);
+                            response.end()
+                        }
+                    }
+                }
+            }
+            response.writeHead( 400);
+            response.end("ERROR")
+        } catch (err) {
+            response.writeHead( 400);
+            response.end()
+        }
+    });
+}
+/*
+Updates the appdata by deleting the row specified in the json
+ */
+const handleDelete = ( request, response ) => {
+    try {
+        console.log( "request body:"+body )
+        const body = request.json()
+        const keys = Object.keys(body)
+        //first check to make sure that json is formatted correctly
+        if( keys.length === 1 ){
+            //second check to make sure that json is formatted correctly
+            if(keys[0] === "row"){
+                //extracting values from json
+                const row = parseInt(body[keys[0]])
+                //final check to make sure that json is formatted correctly
+                if(row < appdata.length - 1){
+                    //final check to make sure that json is formatted correctly
+                    appdata.splice(row, 1)
+                    //sending response indicating operation was successful
+                    console.log(appdata)
+                    response.writeHead( 200);
+                    response.end()
+                }
+            }
+        }
+        response.writeHead( 400);
+        response.end()
+    } catch(err) {
+        response.writeHead( 400);
+        response.end()
+    }
+}
+
+
+
+
+
+
+
+
 
 const handleGet = function( request, response ) {
   const filename = dir + request.url.slice( 1 ) 
@@ -68,13 +194,13 @@ const handlePost = function( request, response ) {
               response.end(JSON.stringify(rtr))
           }
           else{
-              response.status = 400;
+              response.writeHead( 400);
               response.end();
           }
       }
       catch( e ) {
           console.error( e.message );
-          response.status = 400;
+          response.writeHead( 400);
           response.end();
       }
   })

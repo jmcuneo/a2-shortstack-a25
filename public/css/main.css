@@ -3,7 +3,7 @@ body {
   color:white;
 }
 
-nav{
+.main, nav{
     background-color:white;
     margin:auto;
     padding:1em;
@@ -29,15 +29,15 @@ nav p{
     border:1px solid darkgray;
     margin:1em;
     padding:1em;
-    color:darkgray;
+    color:darkslategray;
 }
 
 nav a, a:visited{
-    color:darkgray;
+    color:darkslategray;
 }
 
 nav a:hover{
-    color:darkslategray;
+    color:navy;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -47,4 +47,44 @@ h1, h2, h3, h4, h5, h6 {
 
 nav h1, nav h2, nav h3, nav h4, nav h5, nav h6 {
     color:darkslateblue;
+}
+
+#merchform h2{
+    color:darkslateblue;
+}
+
+#merchform{
+    border:1px solid darkslategray;
+    padding:1em;
+    margin:auto;
+    justify-self: flex-end;
+    color:darkslategray;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    justify-items: flex-start;
+}
+
+#merchform input{
+    flex-grow:1;
+}
+
+#merchform label{
+    padding-right:1em
+}
+
+.horizontal{
+    padding:1em;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    justify-items: flex-start;
+}
+
+.vertical{
+    padding:1em;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    justify-items: flex-start;
 }

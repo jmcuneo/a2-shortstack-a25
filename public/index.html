@@ -11,15 +11,45 @@
   </head>
   <body>
     <nav>
-        <h1>Merch Form</h1>
+        <h1>Gompei's Gear</h1>
         <div>
             <p>Home</p>
             <p><a href="result.html">Results</a></p>
         </div>
     </nav>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
-    </form>
+    <div class = "main">
+        <form id="merchform">
+            <h2>Merch Form</h2>
+            <div class = "vertical">
+                <div class = "horizontal">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" placeholder="Please Enter First Name" value="">
+                </div>
+                <div class = "horizontal">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" placeholder="Please Enter Last Name" value="">
+                </div>
+                <div class = "horizontal">
+                    <label for="address">Address Name:</label>
+                    <input type="text" id="address" placeholder="Please Enter Address" value="">
+                </div>
+                <div class = "horizontal">
+                    <label for="shirts">Number of Shirts:</label>
+                    <input type="number" id="shirts" placeholder="0" value="0" min = "0" max="1000" step = "1">
+                </div>
+                <div class = "horizontal">
+                    <label for="jackets">Number of Jackets:</label>
+                    <input type="number" id="jackets" placeholder="0" value="0" min = "0" max="1000" step = "1">
+                </div>
+                <div class = "horizontal">
+                    <label for="hats">Number of Hats:</label>
+                    <input type="number" id="hats" placeholder="0" value="0" min = "0" max="1000" step = "1">
+                </div>
+            </div>
+            <button>submit</button>
+        </form>
+    </div>
+
+
   </body>
 </html>

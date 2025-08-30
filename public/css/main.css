@@ -2,3 +2,49 @@ body {
   background:black;
   color:white;
 }
+
+nav{
+    background-color:white;
+    margin:auto;
+    padding:1em;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:center;
+    justify-items: center;
+    width:80%;
+}
+
+nav div{
+    margin:auto;
+    padding:1em;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    justify-items: center;
+}
+
+nav p{
+    border:1px solid darkgray;
+    margin:1em;
+    padding:1em;
+    color:darkgray;
+}
+
+nav a, a:visited{
+    color:darkgray;
+}
+
+nav a:hover{
+    color:darkslategray;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color:white;
+    text-align:center;
+}
+
+nav h1, nav h2, nav h3, nav h4, nav h5, nav h6 {
+    color:darkslateblue;
+}

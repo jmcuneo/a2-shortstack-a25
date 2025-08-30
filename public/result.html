@@ -18,8 +18,55 @@
             <p>Results</p>
         </div>
     </nav>
-    <div class = "main">
-
+    <div class = "main" id = "first">
+        <table id="results" class="collapsible">
+            <caption><strong>Current Orders in the System</strong></caption>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Number of Shirts</th>
+                <th>Number of Jackets</th>
+                <th>Number of Hats</th>
+                <th>Total Price</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <div class = "main" id = "second">
+        <div class="vertical">
+            <div class="horizontal">
+                <div class="horizontal">
+                    <div class = "vertical">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" value="">
+                        <button id = "save">Save Changes To Order</button>
+                    </div>
+                    <div class = "vertical">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" value="">
+                    </div>
+                    <div class = "vertical">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" value="">
+                        <button id= "discard">Discard Changes To Order</button>
+                    </div>
+                    <div class = "vertical">
+                        <label for="shirts">Number of Shirts:</label>
+                        <input type="number" id="shirts" value="0" min = "0" max="1000" step = "1">
+                    </div>
+                    <div class = "vertical">
+                        <label for="jackets">Number of Jackets:</label>
+                        <input type="number" id="jackets" value="0" min = "0" max="1000" step = "1">
+                    </div>
+                    <div class = "vertical">
+                        <label for="hats">Number of Hats:</label>
+                        <input type="number" id="hats" value="0" min = "0" max="1000" step = "1">
+                        <button id = "delete">Delete Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

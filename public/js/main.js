@@ -25,7 +25,18 @@ const submit = async function( event ) {
         })
 
         const text = await response.text()
-
+        const msg = document.getElementById( "response message" ) //gets the response message
+        if(response){
+            if(response.status === 200) {
+                msg.innerHTML = "Received order with information:" + text
+                setTimeout(()=>{
+                    msg.innerHTML = ""
+                },1000)
+            }
+            else{
+                msg.innerHTML = "Something went wrong with order submission"
+            }
+        }
         console.log( "text:", text )
     }
 

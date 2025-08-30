@@ -1,18 +1,66 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>CS4241 Assignment 2</title>
-    <meta charset="utf-8">
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    
-    <!-- get rid of favicon error -->
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  </head>
-  <body>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
+<head>
+  <title>Shift Tracker</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Shift Tracker</h1>
+  <p>Log shifts · Track hours & tips · See $/hour</p>
+  <p><strong>Nia Junod — CS4241 Demo</strong></p>
+</header>
+
+<main>
+  <!-- Form Section -->
+  <section id="form-section">
+    <h2>Add / Edit Shift</h2>
+    <form id="shiftForm">
+      <input type="hidden" id="shiftId" name="id">
+
+      <div class="form-group">
+        <label for="restaurant">Restaurant</label>
+        <input type="text" id="restaurant" name="restaurant" placeholder="e.g. Pridwin Hotel" required>
+      </div>
+
+      <div class="form-group">
+        <label for="hours">Hours worked</label>
+        <input type="number" id="hours" name="hours" step="0.1" placeholder="e.g. 6" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tips">Tips earned ($)</label>
+        <input type="number" id="tips" name="tips" step="0.01" placeholder="e.g. 120.00" required>
+      </div>
+
+      <button type="submit" class="submit-btn">Add Shift</button>
     </form>
-  </body>
+    <p class="note">Note: $/hour is computed on the server from tips ÷ hours.</p>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results">
+    <h2>All Shifts</h2>
+    <p id="stats">Total Hours: 0 | Total Tips: $0.00 | Average $/hr: $0.00</p>
+    <table id="shiftTable">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Restaurant</th>
+        <th>Hours</th>
+        <th>Tips</th>
+        <th>$ / Hour</th>
+        <th>When</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="note">Shift Tracker demo — data stored in server memory only (not persistent).</p>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
 </html>

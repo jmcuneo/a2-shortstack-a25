@@ -1,4 +1,148 @@
 body {
-  background:black;
-  color:white;
+  font-family: 'Poppins', sans-serif;
+  background: #F7F9FC;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #649EE0;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 5px solid #2D4A1B;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2em;
+}
+
+/* Form Section */
+#form-section {
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#form-section h2 {
+  text-align: center;
+  color: #2D4A1B;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #649EE0;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.submit-btn {
+  background: #E29EFA;
+  color: #2D4A1B;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background: #8F9EE1;
+  color: #fff;
+}
+
+.note {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #41494C;
+}
+
+/* Results Section */
+#results {
+  margin: 30px auto;
+  max-width: 900px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#results h2 {
+  color: #2D4A1B;
+  margin-bottom: 10px;
+}
+
+#stats {
+  font-weight: bold;
+  color: #649EE0;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+thead {
+  background: #2D4A1B;
+  color: #fff;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) {
+  background: #F2F6FF;
+}
+
+button.edit-btn, button.delete-btn {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn {
+  background: #649EE0;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #2D4A1B;
+}
+
+.delete-btn {
+  background: #E29EFA;
+  color: #2D4A1B;
+}
+
+.delete-btn:hover {
+  background: #8F9EE1;
+  color: white;
 }

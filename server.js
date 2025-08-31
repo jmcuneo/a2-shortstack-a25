@@ -7,9 +7,9 @@ let nextId = 1;
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
-    sendFile(res, 'index.html');
-  } else if (req.method === 'GET' && req.url === '/style.css') {
-    sendFile(res, 'style.css', 'text/css');
+    sendFile(res, 'public/index.html');
+  } else if (req.method === 'GET' && req.url === '/css/main.css') {
+    sendFile(res, 'public/css/main.css', 'text/css');
   } else if (req.method === 'GET' && req.url === '/script.js') {
     sendFile(res, 'script.js', 'application/javascript');
   } else if (req.url.startsWith('/api/shifts')) {

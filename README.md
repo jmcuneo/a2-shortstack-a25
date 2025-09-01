@@ -1,5 +1,8 @@
 Shift Tracker
 
+Its on render here:
+https://a2-niajunod.onrender.com/
+
 A two-tier web application that allows restaurant servers to log shifts, track hours and tips, and automatically calculate their average earnings per hour.
 
 I built this app because of my summer restaurant experience. Our managers didn’t want to show us the shared Google Sheet where all tips were recorded, even though every server wanted to know the numbers. For example, during checkout, the system would only tell me the total tips I made that night, but by the time we received our checks, the numbers often looked inconsistent or confusing. It was frustrating not having visibility into my data.

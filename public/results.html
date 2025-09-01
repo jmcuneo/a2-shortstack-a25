@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>All Tasks</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="/results">View All Tasks</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="results-section">
+            <h2>Task List</h2>
+            <table id="tasksTable">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Created</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tasksTableBody">
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

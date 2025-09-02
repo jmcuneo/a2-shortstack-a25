@@ -19,6 +19,15 @@ I have a Server that maintains a tabular dataset with 3 or more fields related t
 ### UX Achievements. (Ask 2 people)
 - (5 points per person, with a max of 10 points) 
 
+Study Design: I conducted a study on 2 subjects regarding my user interface in order to evaluate the practicality of the website design. 
+I asked the subject to conduct this task: 
+- Make a new task with a random priority
+- navigate to all the tasks
+- delete the new task
+- navigate to home
+
+Results::::::::::
+
 Person 1:
 Last Name: Li
 Problems with design: 

@@ -11,8 +11,8 @@ let nextId = 1;
 function calculateDeadline(creation_date, priority) {
     const createDate = new Date(creation_date);
     let daysToAdd;
-    
-    switch(priority) {
+
+    switch(priority) { // Determine days to add based on priority
         case 'high': daysToAdd = 3; break;
         case 'medium': daysToAdd = 7; break;
         case 'low': daysToAdd = 14; break;
@@ -20,7 +20,7 @@ function calculateDeadline(creation_date, priority) {
     }
     
     createDate.setDate(createDate.getDate() + daysToAdd);
-    return createDate.toISOString().split('T')[0];
+    return createDate.toISOString().split('T')[0]; 
 }
 
 const server = http.createServer((req, res) => {

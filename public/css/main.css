@@ -142,13 +142,8 @@ nav h1, nav h2, nav h3, nav h4, nav h5, nav h6 {
     color:white;
 }
 
-.delete{
+.delete, #discard{
     background-color:darkred;
-    color:white;
-}
-
-#discard{
-    background-color:darkmagenta;
     color:white;
 }
 

@@ -188,7 +188,7 @@ h2 {
     min-height: 100px;
 }
 
-/* Responsive design using flexbox for smaller screens */
+/* Responsive design using flexbox */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;

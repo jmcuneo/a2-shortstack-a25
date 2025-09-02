@@ -8,11 +8,7 @@ const http = require( "http" ),
       dir  = "public/",
       port = 3000
 
-const appdata = [
-  { "model": "toyota", "year": 1999, "mpg": 23 },
-  { "model": "honda", "year": 2004, "mpg": 30 },
-  { "model": "ford", "year": 1987, "mpg": 14} 
-]
+const appdata = []
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
@@ -22,13 +18,16 @@ const server = http.createServer( function( request,response ) {
   }
 })
 
-const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
-
-  if( request.url === "/" ) {
-    sendFile( response, "public/index.html" )
-  }else{
-    sendFile( response, filename )
+const handleGet = function(request, response) {
+  if (request.url === "/") {
+    sendFile(response, "public/index.html")
+  } else if (request.url === "/todos") {
+    // Send todo list as JSON
+    response.writeHead(200, { "Content-Type": "application/json" })
+    response.end(JSON.stringify(appdata))
+  } else {
+    const filename = dir + request.url.slice(1)
+    sendFile(response, filename)
   }
 }
 
@@ -39,14 +38,27 @@ const handlePost = function( request, response ) {
       dataString += data 
   })
 
-  request.on( "end", function() {
-    console.log( JSON.parse( dataString ) )
+  request.on("end", function() {
+    if (request.url === "/submit") {
+      const todo = JSON.parse(dataString);
+      
+      // Derived field: days left until due date
+      const dueDate = new Date(todo.taskDueDate);
+      const today = new Date();
+      const daysLeft = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
 
-    // ... do something with the data here!!!
-
-    response.writeHead( 200, "OK", {"Content-Type": "text/plain" })
-    response.end("test")
-  })
+      todo.daysLeft = daysLeft;
+      appdata.push(todo);
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(appdata));
+    } else if (request.url === "/delete") {
+      const { idx } = JSON.parse(dataString);
+      
+      appdata.splice(idx, 1);
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(appdata));
+    }
+  });
 }
 
 const sendFile = function( response, filename ) {
@@ -56,13 +68,11 @@ const sendFile = function( response, filename ) {
 
      // if the error = null, then we"ve loaded the file successfully
      if( err === null ) {
-
        // status code: https://httpstatuses.com
        response.writeHeader( 200, { "Content-Type": type })
        response.end( content )
 
-     }else{
-
+     } else{
        // file not found, error code 404
        response.writeHeader( 404 )
        response.end( "404 Error: File Not Found" )

@@ -1,18 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>CS4241 Assignment 2</title>
-    <meta charset="utf-8">
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    
-    <!-- get rid of favicon error -->
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  </head>
-  <body>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
-    </form>
-  </body>
+
+<head>
+  <title>CS4241 Assignment 2</title>
+  <meta charset="utf-8">
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Trashcan icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+  <!-- get rid of favicon error -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h1>The world's best todo list</h1>
+      <form class="todo-form">
+        <input type="text" id="taskTitle" value="" placeholder="Task" required>
+        <input type="text" id="taskDescription" value="" placeholder="Description" required>
+        <input type="date" id="taskDueDate" value="" placeholder="Due Date" required>
+
+        <button type="submit">Submit</button>
+      </form>
+      <hr>
+
+      <h2>Todo List</h2>
+      <!-- Maybe add a filter here -->
+
+      <ul id="todo-table">
+        <!-- Todo items will be rendered here -->
+      </ul>
+      <footer>
+        <p>&copy; Eric Li - CS4241 Assignment 2</p>
+      </footer>
+    </div>
+  </main>
+
+</body>
+
 </html>

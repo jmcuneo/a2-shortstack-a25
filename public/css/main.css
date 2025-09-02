@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Vend Sans:wght@300;400;600;700&display=swap');
+
 body {
-  background:black;
-  color:white;
+    font-family: 'Vend Sans', 'Helvetica', 'Arial', sans-serif;
+    background:black;
+    color:white;
 }
 
 .main, nav{
@@ -122,10 +125,35 @@ nav h1, nav h2, nav h3, nav h4, nav h5, nav h6 {
     justify-content:flex-start;
 }
 
-#second input, #second label{
-    margin-bottom:1em
+#second label{
+    margin-bottom:1em;
+}
+
+#second input{
+    margin-bottom:2em;
 }
 
 #second button:hover{
-    color:darkslateblue;
+    color:gray;
+}
+
+#save{
+    background-color:darkslateblue;
+    color:white;
+}
+
+.delete{
+    background-color:darkred;
+    color:white;
+}
+
+#discard{
+    background-color:darkmagenta;
+    color:white;
+}
+
+.buttonHolder{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
 }

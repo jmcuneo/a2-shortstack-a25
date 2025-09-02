@@ -1,24 +1,24 @@
-const http = require( "http" ),
-      fs   = require( "fs" ),
-      // IMPORTANT: you must run `npm install` in the directory for this assignment
-      // to install the mime library if you"re testing this on your local machine.
-      // However, Glitch will install it automatically by looking in your package.json
-      // file.
-      mime = require( "mime" ),
-      dir  = "public/",
-      port = 3000
+const http = require("http"),
+  fs = require("fs"),
+  // IMPORTANT: you must run `npm install` in the directory for this assignment
+  // to install the mime library if you"re testing this on your local machine.
+  // However, Glitch will install it automatically by looking in your package.json
+  // file.
+  mime = require("mime"),
+  dir = "public/",
+  port = 3000
 
 const appdata = []
 
-const server = http.createServer( function( request,response ) {
-  if( request.method === "GET" ) {
-    handleGet( request, response )    
-  }else if( request.method === "POST" ){
-    handlePost( request, response ) 
+const server = http.createServer(function (request, response) {
+  if (request.method === "GET") {
+    handleGet(request, response)
+  } else if (request.method === "POST") {
+    handlePost(request, response)
   }
 })
 
-const handleGet = function(request, response) {
+const handleGet = function (request, response) {
   if (request.url === "/") {
     sendFile(response, "public/index.html")
   } else if (request.url === "/todos") {
@@ -31,16 +31,16 @@ const handleGet = function(request, response) {
   }
 }
 
-const handlePost = function( request, response ) {
+const handlePost = function (request, response) {
   let dataString = ""
-  request.on( "data", function( data ) {
-      dataString += data 
+  request.on("data", function (data) {
+    dataString += data
   })
 
-  request.on("end", function() {
+  request.on("end", function () {
     if (request.url === "/submit") {
       const todo = JSON.parse(dataString);
-      
+
       // Derived field: days left until due date
       const dueDate = new Date(todo.taskDueDate);
       const today = new Date();
@@ -53,13 +53,14 @@ const handlePost = function( request, response ) {
       console.log(appdata)
     } else if (request.url === "/delete") {
       const { idx } = JSON.parse(dataString);
-      
+
       appdata.splice(idx, 1);
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
       console.log(appdata)
     } else if (request.url === "/toggle") {
       const { idx, completed } = JSON.parse(dataString);
+
       appdata[idx].completed = completed;
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
@@ -68,24 +69,24 @@ const handlePost = function( request, response ) {
   });
 }
 
-const sendFile = function( response, filename ) {
-   const type = mime.getType( filename ) 
+const sendFile = function (response, filename) {
+  const type = mime.getType(filename)
 
-   fs.readFile( filename, function( err, content ) {
+  fs.readFile(filename, function (err, content) {
 
-     // if the error = null, then we"ve loaded the file successfully
-     if( err === null ) {
-       // status code: https://httpstatuses.com
-       response.writeHeader( 200, { "Content-Type": type })
-       response.end( content )
+    // if the error = null, then we"ve loaded the file successfully
+    if (err === null) {
+      // status code: https://httpstatuses.com
+      response.writeHeader(200, { "Content-Type": type })
+      response.end(content)
 
-     } else{
-       // file not found, error code 404
-       response.writeHeader( 404 )
-       response.end( "404 Error: File Not Found" )
+    } else {
+      // file not found, error code 404
+      response.writeHeader(404)
+      response.end("404 Error: File Not Found")
 
-     }
-   })
+    }
+  })
 }
 
-server.listen( process.env.PORT || port )
+server.listen(process.env.PORT || port)

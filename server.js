@@ -3,14 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-// In-memory dataset for tasks
-let tasks = [
-    { id: 1, task: "Complete assignment", priority: "high", creation_date: "2024-01-15", deadline: "2024-01-20" },
-    { id: 2, task: "Review code", priority: "medium", creation_date: "2024-01-16", deadline: "2024-01-19" }
-];
-let nextId = 3;
+// Define dataset for tasks
+let tasks = [];
+let nextId = 1;
 
-// Function to calculate derived field (deadline based on priority and creation date)
+// Function to calculate derived field [Baseline Req] (deadline based on priority and creation date)
 function calculateDeadline(creation_date, priority) {
     const createDate = new Date(creation_date);
     let daysToAdd;

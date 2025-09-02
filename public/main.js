@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if we're on results page and force load
     if (window.location.pathname === '/results') {
-        // Ensure tasks load on results page
         setTimeout(loadTasks, 100);
     }
 

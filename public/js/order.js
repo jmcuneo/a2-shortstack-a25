@@ -25,6 +25,10 @@ const getTable = async () => {
                 row.insertCell().innerHTML = data[i].jackets
                 row.insertCell().innerHTML = data[i].hats
                 row.insertCell().innerHTML = data[i].totalPrice
+
+                const buttonHolder = document.createElement("div");
+                buttonHolder.className = "buttonHolder";
+
                 //creates a button that allows for user to access a page that allows for deletion and modification of the row
                 const button = document.createElement("button");
                 button.innerText = "update"
@@ -32,7 +36,31 @@ const getTable = async () => {
                 button.onclick = () =>{
                     update(button.id, data[i])
                 }
-                row.insertCell().appendChild(button)
+
+
+                //gives the delete button its functionality which is to have the server delete the row, and then reload the page
+                const del = document.createElement("button");
+                del.innerText = "delete"
+                del.className = "delete"
+                del.onclick = async () => {
+                    //creates body for http request
+                    const body = JSON.stringify( {
+                        "row":i,
+                    })
+                    //Uses DELETE request to update table
+                    await fetch("/results", {
+                        method: "DELETE",
+                        body: body,
+                    }).then((response)=>{
+                        // console.log(response)
+                        window.location.reload()
+                    })
+                }
+
+                buttonHolder.appendChild(button)
+                buttonHolder.appendChild(del)
+
+                row.insertCell().appendChild(buttonHolder)
             }
         }
     }
@@ -47,7 +75,6 @@ const update = (row, data) => {
     //buttons
     const save = document.getElementById("save")
     const discard = document.getElementById("discard")
-    const del = document.getElementById("delete")
     //fields
     const firstName = document.getElementById("firstName")
     const lastName = document.getElementById("lastName")
@@ -57,7 +84,7 @@ const update = (row, data) => {
     const hats = document.getElementById("hats")
 
 
-    if(main && secondary && save && discard && del && firstName && lastName && address && shirts && jackets && hats){
+    if(main && secondary && save && discard && firstName && lastName && address && shirts && jackets && hats){
         // console.log("now to switch")
         //switches which div is displayed onscreen
         // console.log(data)
@@ -103,15 +130,15 @@ const update = (row, data) => {
             // jackets.value,
             // hats.value)
             //creates body for http request
-            const body = JSON.stringify( {
-                "row":row,
+            const body = JSON.stringify({
+                "row": row,
                 "data": {
-                        "firstName":firstName.value,
-                        "lastName":lastName.value,
-                        "address":address.value,
-                        "shirts":shirts.value,
-                        "jackets":jackets.value,
-                        "hats":hats.value,
+                    "firstName": firstName.value,
+                    "lastName": lastName.value,
+                    "address": address.value,
+                    "shirts": shirts.value,
+                    "jackets": jackets.value,
+                    "hats": hats.value,
                 }
 
             })
@@ -119,29 +146,7 @@ const update = (row, data) => {
             await fetch("/results", {
                 method: "PUT",
                 body: body,
-            }).then((response)=>{
-                // console.log(response)
-                window.location.reload()
-            })
-        }
-        //gives the delete button its functionality which is to have the server delete the row, and then reload the page
-        del.onclick = async () => {
-            //makes it so that the user cannot edit fields while deleting
-            firstName.disabled = true
-            lastName.disabled = true
-            address.disabled = true
-            shirts.disabled = true
-            jackets.disabled = true
-            hats.disabled = true
-            //creates body for http request
-            const body = JSON.stringify( {
-                "row":row,
-            })
-            //Uses DELETE request to update table
-            await fetch("/results", {
-                method: "DELETE",
-                body: body,
-            }).then((response)=>{
+            }).then((response) => {
                 // console.log(response)
                 window.location.reload()
             })

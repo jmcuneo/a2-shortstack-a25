@@ -33,6 +33,8 @@ const handleGet = function(request, response) {
 
 const handlePost = function( request, response ) {
   let dataString = ""
+  
+  console.log(appdata)
 
   request.on( "data", function( data ) {
       dataString += data 
@@ -51,17 +53,28 @@ const handlePost = function( request, response ) {
       appdata.push(todo);
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
+
+      console.log(appdata)
+
     } else if (request.url === "/delete") {
       const { idx } = JSON.parse(dataString);
       
       appdata.splice(idx, 1);
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
+
+      console.log(appdata)
+
+
     } else if (request.url === "/toggle") {
       const { idx, completed } = JSON.parse(dataString);
       appdata[idx].completed = completed;
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
+
+      console.log(appdata)
+
+      
     }
   });
 }

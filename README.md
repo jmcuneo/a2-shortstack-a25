@@ -1,5 +1,5 @@
-Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js  
-Deployed at: https://a2-alexli.onrender.com/
+## Assignment 2 - Alex Li
+## Deployed at: https://a2-alexli.onrender.com/
 
 ## Description
 This project is a task manager, in which a user can set a task description, Priority of the task (High, Medium, Low), and set a creation date(Defaulted to the day of access). The project also satisfies all baseline and technical achievments. The CSS positioning techniques I used are seperations into divs, elements, and classes. Within each of these, we have individual styling and placement using border radiuses, border placements, and padding. To run this project, access it through this link: https://a2-alexli.onrender.com/. If you want to run locally, do 'git clone https://github.com/alexli888/a2-AlexLi', install node, run 'npm run dev' Or 'node server.js'

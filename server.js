@@ -33,6 +33,8 @@ const server = http.createServer((req, res) => {
         serveFile('public/results.html', 'text/html', res);
     } else if (req.method === 'GET' && pathname === '/style.css') {
         serveFile('public/style.css', 'text/css', res);
+    } else if (req.method === 'GET' && pathname === '/main.js') {
+        serveFile('public/main.js', 'application/javascript', res);
     } else if (req.method === 'GET' && pathname === '/script.js') {
         serveFile('public/script.js', 'application/javascript', res);
     } else if (req.method === 'GET' && pathname === '/api/tasks') {

@@ -74,10 +74,17 @@ body {
 #todo-table li {
   padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--color-2);
+  transition: background 0.2s;
 }
 
 #todo-table li:last-child {
   border-bottom: none;
+}
+
+#todo-table li.completed {
+  text-decoration: line-through;
+  color: #888;
+  background: #e0eafc;
 }
 
 footer {

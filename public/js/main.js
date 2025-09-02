@@ -38,6 +38,8 @@ function renderTodos(todos) {
   list.innerHTML = ""; // Clear existing todos
   todos.forEach((todo, idx) => {
     const li = document.createElement("li")
+    if (todo.completed) li.classList.add("completed");
+
     li.innerHTML = `
       <strong>${todo.taskTitle}</strong> - ${todo.taskDescription} 
       <span style="color: var(--color-5);">Due: ${todo.taskDueDate}</span>
@@ -46,14 +48,18 @@ function renderTodos(todos) {
         <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
       </button>
     `
-    
+    li.onclick = function(e) {
+      if (!e.target.classList.contains("delete-btn") && !e.target.classList.contains("fa-trash-o")) {
+        toggleCompleted(idx, !todo.completed);
+      }
+    };
     list.appendChild(li)
   });
 
   document.querySelectorAll(".delete-btn").forEach(button => {
-    button.onclick = async function() {
+    button.onclick = async function(e) {
+      e.stopPropagation();
       const idx = button.getAttribute("data-idx");
-
       const response = await fetch("/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,6 +69,16 @@ function renderTodos(todos) {
       renderTodos(todos);
     };
   });
+}
+
+async function toggleCompleted(idx, completed) {
+  const response = await fetch("/toggle", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ idx, completed })
+  });
+  const todos = await response.json();
+  renderTodos(todos);
 }
 
 async function fetchTodos() {

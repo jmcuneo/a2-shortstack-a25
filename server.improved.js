@@ -57,6 +57,11 @@ const handlePost = function( request, response ) {
       appdata.splice(idx, 1);
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
+    } else if (request.url === "/toggle") {
+      const { idx, completed } = JSON.parse(dataString);
+      appdata[idx].completed = completed;
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(appdata));
     }
   });
 }

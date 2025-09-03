@@ -60,8 +60,21 @@ const handlePost = function (request, response) {
       console.log(appdata)
     } else if (request.url === "/toggle") {
       const { idx, completed } = JSON.parse(dataString);
-
       appdata[idx].completed = completed;
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(appdata));
+      console.log(appdata)
+    } else if (request.url === "/edit") {
+      const { idx, taskTitle, taskDescription, taskDueDate } = JSON.parse(dataString);
+      if (appdata[idx]) {
+        appdata[idx].taskTitle = taskTitle;
+        appdata[idx].taskDescription = taskDescription;
+        appdata[idx].taskDueDate = taskDueDate;
+        // recalculate daysLeft
+        const dueDate = new Date(taskDueDate);
+        const today = new Date();
+        appdata[idx].daysLeft = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+      }
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end(JSON.stringify(appdata));
       console.log(appdata)

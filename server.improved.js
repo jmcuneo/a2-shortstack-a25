@@ -8,7 +8,15 @@ const http = require("http"),
   dir = "public/",
   port = 3000
 
-const appdata = []
+const appdata = [
+  {
+    taskTitle: "Sample Task",
+    taskDescription: "This is a sample task.",
+    taskDueDate: "2025-09-07",
+    completed: false,
+    daysLeft: 5
+  }
+]
 
 const server = http.createServer(function (request, response) {
   if (request.method === "GET") {

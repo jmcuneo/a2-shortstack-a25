@@ -152,8 +152,89 @@ async function fetchTodos() {
   renderTodos(todos);
 }
 
+// Interactive Guide
+const guideSteps = [
+  {
+    selector: ".todo-form",
+    message: "This is the form. Fill in the fields and click Submit to add a new todo."
+  },
+  {
+    selector: "#todo-table",
+    message: "Here is your todo list. Each item can be edited, deleted, or marked as completed (click anywhere on the item)."
+  },
+  {
+    selector: ".edit-btn",
+    message: "Click the pencil icon to edit a todo item."
+  },
+  {
+    selector: ".delete-btn",
+    message: "Click the trash icon to delete a todo item."
+  }
+];
+
+function startGuide(step = 0) {
+  // Remove any existing guide overlay
+  const old = document.getElementById("guide-overlay");
+  if (old) old.remove();
+  const oldTip = document.getElementById("guide-tooltip");
+  if (oldTip) oldTip.remove();
+
+  if (step >= guideSteps.length) return;
+
+  const { selector, message } = guideSteps[step];
+  const target = document.querySelector(selector);
+  if (!target) {
+    startGuide(step + 1);
+    return;
+  }
+
+  // Highlight the element
+  const rect = target.getBoundingClientRect();
+  const overlay = document.createElement("div");
+  overlay.id = "guide-overlay";
+  overlay.style.position = "fixed";
+  overlay.style.top = rect.top - 10 + "px";
+  overlay.style.left = rect.left - 10 + "px";
+  overlay.style.width = rect.width + 20 + "px";
+  overlay.style.height = rect.height + 20 + "px";
+  overlay.style.border = "3px solid #0074D9";
+  overlay.style.borderRadius = "12px";
+  overlay.style.zIndex = 2000;
+  document.body.appendChild(overlay);
+
+  // Tips
+  const tooltip = document.createElement("div");
+  tooltip.style.position = "fixed";
+  tooltip.style.top = rect.bottom + 15 + "px";
+  tooltip.style.left = rect.left + "px";
+  tooltip.style.background = "#fff";
+  tooltip.style.padding = "1rem";
+  tooltip.style.border = "2px solid #0074D9";
+  tooltip.style.borderRadius = "8px";
+  tooltip.style.zIndex = 2001; // ensure the tip is above highlighted element
+  tooltip.innerHTML = `
+    <div style="margin-bottom:0.5rem;">${message}</div>
+    <button id="next-guide-step">Next</button>
+    <button id="end-guide-step" style="margin-left:0.5rem;">End Guide</button>
+  `;
+  tooltip.id = "guide-tooltip";
+  document.body.appendChild(tooltip);
+
+  document.getElementById("next-guide-step").onclick = () => {
+    overlay.remove();
+    tooltip.remove();
+    startGuide(step + 1);
+  };
+  document.getElementById("end-guide-step").onclick = () => {
+    overlay.remove();
+    tooltip.remove();
+  };
+}
+
 window.onload = function () {
   const form = document.querySelector(".todo-form"); // allow for keyboard entry
   form.onsubmit = submit;
   fetchTodos();
+  const guideBtn = document.getElementById("start-guide");
+  if (guideBtn) guideBtn.onclick = () => startGuide(0);
 }

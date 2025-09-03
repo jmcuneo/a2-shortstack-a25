@@ -105,6 +105,7 @@ Yes.
 
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
+Note on AI use: I used ChatGPT to ask technical questions like how to add IDs to tasks or JavaScript syntax questions. I also used it to understand JavaScript notation and for debugging purposes.
 
 ## Your Web Application Title
 Include a very brief summary of your project here. Be sure to include the CSS positioning technique you used, and any required instructions to use your application.

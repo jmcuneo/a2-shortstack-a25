@@ -1,18 +1,38 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>CS4241 Assignment 2</title>
-    <meta charset="utf-8">
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    
-    <!-- get rid of favicon error -->
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  </head>
-  <body>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
-    </form>
-  </body>
+
+    <head>
+        <title>CS4241 Assignment 2</title>
+        <meta charset="utf-8">
+        <script src="js/main.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- get rid of favicon error -->
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    </head>
+
+    <body>
+        <section>
+            <h1>Add a Task</h1>
+
+            <form>
+                <input type="text" class="title" placeholder="title">
+                <input type="text" class="description" placeholder="description">
+                <input type="date" class="dueDate">
+                <button class="submit-btn">Add Task</button>
+            </form>
+
+        </section>
+
+        <section>
+            <h1>To Do List</h1>
+
+            <ul id="tasks">
+
+            </ul>
+        </section>
+
+        <ul>
+    </body>
+
 </html>

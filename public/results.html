@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <title>All Tasks - Task Manager</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Task Manager</h1>
+        <h1>All Tasks</h1>
         <nav>
             <a href="/">Home</a>
             <a href="/results">View All Tasks</a>
@@ -17,14 +17,14 @@
     </header>
 
     <main class="container">
-        <section class="form-section">
-            <h2>Add New Task</h2>
-            <form id="taskForm">
+        <section class="results-section">
+            <h2>Task List</h2>
+            <!-- Add hidden edit form for editing tasks -->
+            <form id="taskForm" style="display:none; margin-bottom:2rem;">
                 <div class="form-group">
                     <label for="task">Task Description:</label>
                     <input type="text" id="task" name="task" required>
                 </div>
-                
                 <div class="form-group">
                     <label for="priority">Priority:</label>
                     <select id="priority" name="priority" required>
@@ -34,19 +34,26 @@
                         <option value="low">Low</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
                     <label for="creation_date">Creation Date:</label>
                     <input type="date" id="creation_date" name="creation_date" required>
                 </div>
-                
-                <button type="submit" class="btn-primary">Add Task</button>
-            </form  >
-        </section>
-
-        <section class="recent-tasks">
-            <h2>Recent Tasks</h2>
-            <div id="taskList"></div>
+                <button type="submit" class="btn-primary">Update Task</button>
+                <button type="button" id="cancelEditBtn" class="btn-primary" style="background:#888;margin-left:1rem;">Cancel</button>
+            </form>
+            <table id="tasksTable">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Created</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tasksTableBody">
+                </tbody>
+            </table>
         </section>
     </main>
 

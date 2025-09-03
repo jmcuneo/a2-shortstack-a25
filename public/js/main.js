@@ -60,15 +60,17 @@ function renderTodos(todos) {
 
   document.querySelectorAll(".delete-btn").forEach(button => {
     button.onclick = async function (e) {
-      e.stopPropagation();
-      const idx = button.getAttribute("data-idx");
-      const response = await fetch("/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idx })
-      });
-      const todos = await response.json();
-      renderTodos(todos);
+      if (confirm("Are you sure you want to delete this task?")) {
+        e.stopPropagation();
+        const idx = button.getAttribute("data-idx");
+        const response = await fetch("/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idx })
+        });
+        const todos = await response.json();
+        renderTodos(todos);
+      }
     };
   });
 

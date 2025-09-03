@@ -14,7 +14,21 @@ I have created a single page app that both provides a form for users to submit d
 
 - **Tech Achievement 2 (Modifying existing data)**:
 
-I have added the capability of editing existing data by creating a new endpoint in teh server "/edit" which takes updated fields, derives the days left, and gives a reponse back to the client with the edited task. We iterate by idx for each task for consistency across the project. The client calls the server through clicking a pencil icon that serves as edit, calling the "/edit" endpoint explained previously, and displaying a popup where the user can edit the fields. Once the user clicks ok, the backend data would update with the provided data, and the frontend will re-render the todo list to keep the two in sync. 
+I have added the capability of editing existing data by creating a new endpoint in teh server "/edit" which takes updated fields, derives the days left, and gives a reponse back to the client with the edited task. We iterate by idx for each task for consistency across the project. The client calls the server through clicking a pencil icon that serves as edit, calling the "/edit" endpoint explained previously, and displaying a popup where the user can edit the fields. Once the user clicks ok, the backend data would update with the provided data, and the frontend will re-render the todo list to keep the two in sync.
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: 
+
+TASK: Create 3 tasks, edit one of them, delete a different one, refresh page to see if data still there
+
+Person 1:
+1. Li
+2. Problems: Strike through is unclear, delete should have confirmation, make data more readable
+3. Comments: I'm suprised that the strik-through is unclear.
+4. What would I change about the interface: Add a short guide at the top explaining what each possible interaction could be. The alert suggestion is a good idea. I implemented it
+
+Person 2:
+1.
+2. Problems:
+3. Comments:
+4. What would I change about the interface:

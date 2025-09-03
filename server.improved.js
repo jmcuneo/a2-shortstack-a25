@@ -10,11 +10,11 @@ const http = require("http"),
 
 const appdata = [
   {
-    taskTitle: "Sample Task",
-    taskDescription: "This is a sample task.",
-    taskDueDate: "2025-09-07",
+    taskTitle: "HW2",
+    taskDescription: "Webware Shortstack application",
+    taskDueDate: "2025-09-08",
     completed: false,
-    daysLeft: 5
+    daysLeft: 0
   }
 ]
 

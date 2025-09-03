@@ -19,6 +19,28 @@
     <main class="container">
         <section class="results-section">
             <h2>Task List</h2>
+            <!-- Add hidden edit form for editing tasks -->
+            <form id="taskForm" style="display:none; margin-bottom:2rem;">
+                <div class="form-group">
+                    <label for="task">Task Description:</label>
+                    <input type="text" id="task" name="task" required>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority" required>
+                        <option value="">Select Priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="creation_date">Creation Date:</label>
+                    <input type="date" id="creation_date" name="creation_date" required>
+                </div>
+                <button type="submit" class="btn-primary">Update Task</button>
+                <button type="button" id="cancelEditBtn" class="btn-primary" style="background:#888;margin-left:1rem;">Cancel</button>
+            </form>
             <table id="tasksTable">
                 <thead>
                     <tr>

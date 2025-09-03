@@ -61,6 +61,27 @@ const server = http.createServer((req, res) => {
         tasks = tasks.filter(task => task.id !== id);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true }));
+    } else if (req.method === 'PUT' && pathname.startsWith('/api/tasks/')) {
+        // Edit/modify an existing task
+        const id = parseInt(pathname.split('/')[3]);
+        let body = '';
+        req.on('data', chunk => body += chunk.toString());
+        req.on('end', () => {
+            const data = JSON.parse(body);
+            const idx = tasks.findIndex(task => task.id === id);
+            if (idx !== -1) {
+                // Update fields
+                tasks[idx].task = data.task;
+                tasks[idx].priority = data.priority;
+                tasks[idx].creation_date = data.creation_date;
+                tasks[idx].deadline = calculateDeadline(data.creation_date, data.priority);
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify(tasks[idx]));
+            } else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Task not found' }));
+            }
+        });
     } else {
         res.writeHead(404);
         res.end('Not Found');

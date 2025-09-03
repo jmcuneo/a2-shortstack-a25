@@ -160,6 +160,21 @@ h2 {
     background: #c0392b;
 }
 
+.edit-btn {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.edit-btn:hover {
+    background: #d35400;
+}
+
 /* ID selectors */
 #tasksTable {
     width: 100%;

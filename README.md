@@ -14,7 +14,7 @@ I have a Server that maintains a tabular dataset with 3 or more fields related t
 
 - **Add, delete, and modify tasks:**  
   The app allows users to add new tasks via the form, and delete tasks using a "Delete" button next to each task (handled by sending a DELETE request to `/api/tasks/:id`).  
-  To enable modification of existing tasks, you would add an "Edit" button for each task in the UI. When clicked, this would populate the form with the task's current data, allow the user to make changes, and then send a PUT or PATCH request to the server to update the task. The server would update the task in its in-memory dataset and recalculate the derived `deadline` if necessary. After the update, the client fetches the updated task list and refreshes the display, keeping the UI in sync with the server.
+  To enable modification of existing tasks, I added an "Edit" button for each task in the UI. When clicked, this would populate the form with the task's current data, allow the user to make changes, and then send a PUT or PATCH request to the server to update the task. The server would update the task in its in-memory dataset and recalculate the derived `deadline` if necessary. After the update, the client fetches the updated task list and refreshes the display, keeping the UI in sync with the server.
 
 ### UX Achievements. (Ask 2 people)
 - (5 points per person, with a max of 10 points) 

@@ -14,7 +14,7 @@ const appdata = [
     taskDescription: "Webware Shortstack application",
     taskDueDate: "2025-09-08",
     completed: false,
-    daysLeft: 0
+    daysLeft: NaN
   }
 ]
 

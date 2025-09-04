@@ -1,4 +1,4 @@
-https://a2-aaronwaller-a25.onrender.com
+[https://a2-aaronwaller-a25.onrender.com](https://a2-aaronwaller-a25.onrender.com/index.html)
 ## Gompei's Gear
 This is a simple web application that I made that consists of two parts: a form that the user can submit on one page, and the ability to view/change orders on the other page. The pages as a whole made good use of css styling and the flex display method. To use the application simply fill out the form and click submit. If you want to see the other page simply click the orders link. On the order's page simply click the home link to get back to the home page. To update an entry simply click the update button on the right of the information you want to update, then click save to save the updated information, discard changes to discard any changes in the current window, or delete order to delete the order from the table.
 

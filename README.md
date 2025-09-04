@@ -1,5 +1,8 @@
 Deployed at: https://a2-ericli.onrender.com/
+
 Validate site here: https://validator.w3.org/nu/?doc=https%3A%2F%2Fa2-ericli.onrender.com%2F
+
+![HTML Validation Screenshot](public/validation.png)
 
 ## The Best Todo List
 

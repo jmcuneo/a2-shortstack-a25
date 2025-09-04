@@ -1,18 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>CS4241 Assignment 2</title>
-    <meta charset="utf-8">
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    
-    <!-- get rid of favicon error -->
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  </head>
-  <body>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
-    </form>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>TaskRush</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <header>
+    <h1>TaskRush</h1>
+    <p>Plan quickly. Set your own deadlines for tasks.</p>
+    <nav>
+      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fgiannirosato-a25.onrender.com" target="_blank">Validate HTML</a>
+      <a href="https://github.com/giannirosato/a2-giannirosato-a25" target="_blank">Source</a>
+    </nav>
+  </header>
+  <main>
+    <section id="entry-section">
+      <h2 id="form-mode-label">Add Task</h2>
+      <form id="task-form">
+        <label>Title
+          <input type="text" id="title" name="title" required maxlength="80" placeholder="Enter task title" />
+        </label>
+        <label>Priority
+          <select id="priority" name="priority" required>
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </label>
+        <label>Estimate (hrs)
+          <input type="number" id="estimateHrs" name="estimateHrs" step="0.1" min="0.1" max="100" required placeholder="0.1" />
+        </label>
+        <label>Deadline (optional)
+          <input type="date" id="deadline" name="deadline" />
+        </label>
+        <input type="hidden" id="edit-id" />
+        <button type="submit" id="submit-btn">Add</button>
+        <button type="button" id="cancel-edit" class="hidden">Cancel Edit</button>
+      </form>
+    </section>
+    <section id="results-section">
+      <h2>Current Tasks</h2>
+      <div id="error-container"></div>
+      <table id="tasks-table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Est (hrs)</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Urgency</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tasks-body">
+          <!-- rows injected dynamically -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <small>&copy; 2025 Gianni Rosato</small>
+  </footer>
+  <script src="app.js"></script>
+</body>
 </html>

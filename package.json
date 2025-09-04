@@ -1,7 +1,7 @@
 {
   "name": "a2-amandachavarriapleitez",
   "description": "Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js   ===",
-  "author": "",
+  "author": "Amanda Chavarria Pleitez",
   "scripts": {
     "start": "node server.improved.js"
   },

@@ -1,12 +1,10 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "a2-giannirosato-a25",
+  "version": "0.0.1",
+  "description": "TaskRush - A single-page priority task planner with automatic deadline calculation",
+  "author": "Gianni Rosato",
+  "type": "module",
   "scripts": {
-    "start": "node server.improved.js"
-  },
-  "dependencies": {
-    "mime": "^2.6.0"
+    "start": "node server.js"
   }
 }

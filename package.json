@@ -1,8 +1,8 @@
 {
-  "name": "Conor McCoy",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "todolist",
+  "version": "1.0",
+  "description": "A To-Do List",
+  "author": "Conor McCoy",
   "scripts": {
     "start": "node server.improved.js"
   },

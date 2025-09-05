@@ -105,13 +105,20 @@ Yes.
 
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
-Note on AI use: I used ChatGPT to ask technical questions like how to add IDs to tasks or JavaScript syntax questions. I also used it to understand JavaScript notation and for debugging purposes.
+Note on AI use: I used ChatGPT to ask technical questions like how to add numerical IDs to tasks or JavaScript syntax questions (like how to format Date into a more readable form). I also used it to understand JavaScript notation and for debugging purposes.
 
 ## Your Web Application Title
-Include a very brief summary of your project here. Be sure to include the CSS positioning technique you used, and any required instructions to use your application.
+This project is a To-Do List application where users can add, delete, and edit tasks. I used CSS flexbox to position the form elements, buttons, and task items.
 
 ## Technical Achievements
-- **Tech Achievement 1**: Using a combination of...
+- **Tech Achievement 1**: Using a combination of Javascript, HTML, and CSS, I created a single-page app that has a server that maintains a tabular dataset with the fields "title," "description," "due date," and "days until due".
+
+- **Tech Achievement 2**: Using a combination of Javascript, HTML, and CSS, the application always shows the current state of the server-side data.
+
+- **Tech Achievement 3**: Using a combination of Javascript, HTML, and CSS, I created a form that allows users to submit data to the server, enabling them to add, delete, and edit tasks.
+
+- **Tech Achievement 4**: Using Javascript, the application's server calculates the number of days before a task is due using the due date submitted by the user and the current date.
+
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: 

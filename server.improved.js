@@ -8,9 +8,7 @@ const http = require("http"),
     dir = "public/",
     port = 3000;
 
-const appdata = [
-    { title: "Task 1", description: "hello", dueDate: Date("2025-12-22") },
-];
+const appdata = [];
 let taskID = 1;
 
 
@@ -53,6 +51,14 @@ const handleGetTask = function (request, response, id) {
     }
 };
 
+function calculateDaysDue(dueDateStr) {
+    const today = new Date();
+    const dueDate = new Date(dueDateStr);
+
+    const daysUntilDue = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+    return daysUntilDue
+}
+
 const handleAdd = function (request, response) {
     let dataString = "";
 
@@ -64,8 +70,17 @@ const handleAdd = function (request, response) {
     request.on("end", function () {
         const targetTask = JSON.parse(dataString);
 
-        // add to appdata
+        // calculate days until due
+        const daysUntilDue = calculateDaysDue(targetTask.dueDate);
+        if (daysUntilDue >= 0) {
+            targetTask.daysLeft = daysUntilDue;
+        } else {
+            targetTask.daysLeft = "Overdue";
+        }
+
         targetTask.id = taskID;
+
+        // add to appdata
         appdata.push(targetTask);
         taskID++;
 
@@ -92,7 +107,17 @@ const handleEdit = function (request, response) {
         );
 
         if (taskIndex !== -1) {
+            // recalculate days until due
+            const daysUntilDue = calculateDaysDue(updatedTask.dueDate);
+
+            if (daysUntilDue >= 0) {
+                updatedTask.daysLeft = daysUntilDue;
+            } else {
+                updatedTask.daysLeft = "Overdue";
+            }
+
             appdata[taskIndex] = updatedTask;
+
             response.writeHead(200, "OK", { "Content-Type": "text/plain" });
             response.end(JSON.stringify(updatedTask));
         } else {

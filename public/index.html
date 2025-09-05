@@ -6,29 +6,35 @@
         <meta charset="utf-8">
         <script src="js/main.js"></script>
         <link rel="stylesheet" href="css/main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Chango&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+3:ital@0;1&display=swap"
+            rel="stylesheet">
+
 
         <!-- get rid of favicon error -->
         <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     </head>
 
     <body>
-        <section>
-            <h1>Add a Task</h1>
+        <h1>To-Do List</h1>
+        <section id="add">
+            <h2>Add a Task</h2>
 
             <form>
-                <input type="text" class="title" placeholder="title">
-                <input type="text" class="description" placeholder="description">
+                <input type="text" class="title" placeholder="Title">
+                <input type="text" class="description" placeholder="Description">
                 <input type="date" class="dueDate">
                 <button class="submit-btn">Add Task</button>
             </form>
 
         </section>
 
-        <section>
-            <h1>To Do List</h1>
+        <section id="to-do-list">
+            <h2>My To-Do List</h2>
 
             <ul id="tasks">
-
             </ul>
         </section>
 

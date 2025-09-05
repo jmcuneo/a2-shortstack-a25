@@ -1,4 +1,11 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", { 
+        month: "long", day: "numeric", year: "numeric" 
+    });
+};
+
 const deleteTask = async function (event) {
     event.preventDefault();
 
@@ -19,11 +26,13 @@ const deleteTask = async function (event) {
 
 function showEditForm (li, task) {
     li.innerHTML = `
-        <input type="text" id="edit-title" class="title" value="${task.title}" placeholder="title" />
-        <input type="text" id="edit-description" class="description" value="${task.description}" placeholder="description" />
-        <input type="date" id="edit-due" class="dueDate" value="${task.dueDate}" />
-        <button class="save-btn">Save</button>
-        <button class="cancel-btn">Cancel</button>
+        <div id="edit-form">
+            <input type="text" id="edit-title" class="title" value="${task.title}" placeholder="Title" />
+            <input type="text" id="edit-description" class="description" value="${task.description}" placeholder="Description" />
+            <input type="date" id="edit-due" class="dueDate" value="${task.dueDate}" />
+            <button class="save-btn">Save</button>
+            <button class="cancel-btn">Cancel</button>
+        </div>
     `;
 }
 
@@ -44,18 +53,26 @@ async function saveEdit (li) {
 
     li.innerHTML = 
     `
-        ${task.title} - ${task.description} (due ${task.dueDate})
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+        ${task.title}
+        ${task.description ? `: ${task.description}` : ""}
+        ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+        <div class="btn-group">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </div>
     `;
 }
 
 function cancelEdit (li, task) {
     li.innerHTML = 
     `
-        ${task.title} - ${task.description} (due ${task.dueDate})
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+        ${task.title}
+        ${task.description ? `: ${task.description}` : ""}
+        ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+        <div class="btn-group">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </div>
     `;
 }
 
@@ -105,9 +122,13 @@ const submit = async function (event) {
     tasks.innerHTML += 
     `
         <li data-id="${task.id}" class="list-item">
-            ${task.title} - ${task.description} (due ${task.dueDate})
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+            ${task.title} 
+            ${task.description ? `: ${task.description}` : ""}
+            ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+            <div class="btn-group">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
         </li>
     `;
 

@@ -51,11 +51,20 @@ async function saveEdit (li) {
 
     const task = await response.json();
 
-    li.innerHTML = 
-    `
-        ${task.title}
-        ${task.description ? `: ${task.description}` : ""}
-        ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+    li.innerHTML = `
+        <span class="title-text">${task.title}</span>
+        ${task.description ? `:
+            ${task.description}` : ""}
+        <div class="due-date">
+            ${
+                task.dueDate
+                    ? `(Due ${formatDate(task.dueDate)}) 
+                <span class="counter">Days Until Due: </span> ${
+                    task.daysLeft
+                }`
+                    : ""
+            }
+        </div>
         <div class="btn-group">
             <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>
@@ -64,11 +73,19 @@ async function saveEdit (li) {
 }
 
 function cancelEdit (li, task) {
-    li.innerHTML = 
-    `
-        ${task.title}
+    li.innerHTML = `
+        <span class="title-text">${task.title}</span>
         ${task.description ? `: ${task.description}` : ""}
-        ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+        <div class="due-date">
+            ${
+                task.dueDate
+                    ? `(Due ${formatDate(task.dueDate)}) 
+                <span class="counter">Days Until Due: </span> ${
+                    task.daysLeft
+                }`
+                    : ""
+            }
+        </div>
         <div class="btn-group">
             <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>
@@ -119,12 +136,20 @@ const submit = async function (event) {
     });
 
     const task = await response.json()
-    tasks.innerHTML += 
-    `
+    tasks.innerHTML += `
         <li data-id="${task.id}" class="list-item">
-            ${task.title} 
-            ${task.description ? `: ${task.description}` : ""}
-            ${task.dueDate ? `(due ${formatDate(task.dueDate)} --- days until due: ${task.daysLeft})` : ""}
+            <span class="title-text">${task.title}</span>
+            ${task.description ? `:  ${task.description}` : ""}
+            <div class="due-date">
+                ${
+                    task.dueDate
+                        ? `(Due ${formatDate(task.dueDate)}) 
+                    <span class="counter">Days Until Due: </span> ${
+                        task.daysLeft
+                    }`
+                        : ""
+                }
+            </div>
             <div class="btn-group">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>

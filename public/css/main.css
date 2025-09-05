@@ -34,13 +34,13 @@ body {
 #add {
     background: rgb(209, 188, 172);
     border-radius: 10px;
-    padding: 5px 20px 20px 20px;
+    padding: 0px 25px 20px 25px;
 }
 
 #to-do-list {
     background: rgb(209, 188, 172);
     border-radius: 10px;
-    padding: 5px 20px 20px 20px;
+    padding: 0px 25px 20px 25px;
 }
 
 /* task list */
@@ -60,6 +60,16 @@ li::before {
     color: rgb(56, 34, 15);
     font-size: 1.7em;
 }
+.title-text {
+    font-weight: 900;
+}
+.due-date {
+    margin-left: 20px;
+}
+.counter {
+    margin-left: 20px;
+    font-weight: 900;
+}
 
 /* form elements */
 form, #edit-form {
@@ -69,6 +79,12 @@ form, #edit-form {
 }
 
 .submit-btn {
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+
     background: rgb(170, 132, 105);
     border-color: rgb(170, 132, 105);
     border-radius: 10px;
@@ -86,6 +102,12 @@ input {
     border-color: #fbf7e7;
     border-radius: 10px;
     padding: 8px 5px 8px 8px;
+
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
 }
 input[type="text"] {
     width: 70%;
@@ -108,6 +130,12 @@ input[type="date"] {
     border-radius: 10px;
     padding: 9px 5px 9px 5px;
     min-width: 80px;
+
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
 }
 .delete-btn:hover,
 .cancel-btn:hover {
@@ -127,6 +155,12 @@ input[type="date"] {
     border-radius: 10px;
     padding: 9px 5px 9px 5px;
     min-width: 80px;
+
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
 }
 .edit-btn:hover, .save-btn:hover {
     background: #cd9a51;

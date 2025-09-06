@@ -1,4 +1,5 @@
-Arianna Xie
+Arianna Xie <br>
+https://a2-ariannaxie2.onrender.com <br>
 Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js
 
 Note on AI use: I used ChatGPT to ask technical questions like how to add numerical IDs to tasks or JavaScript syntax questions (like how to format Date into a more readable form). I also used it to understand JavaScript notation and for debugging purposes.

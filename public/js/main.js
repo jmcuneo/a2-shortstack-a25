@@ -59,7 +59,7 @@ function updateTable(data) {
       <th>Action</th>
     </tr>
   `;
-  console.log(data)
+  //console.log(data)
 
 
   //Append rows
@@ -72,7 +72,7 @@ function updateTable(data) {
     // Convert milliseconds to days
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    console.log(`The dates are ${diffDays} day(s) apart.`);
+    //console.log(`The dates are ${diffDays} day(s) apart.`);
     row.insertCell(0).innerText = todo.todo;
     row.insertCell(1).innerText = todo.creationDate;
     row.insertCell(2).innerText = todo.deadlineDate;

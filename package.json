@@ -1,8 +1,8 @@
 {
-  "name": "",
+  "name": "a2-owenhart",
   "version": "",
-  "description": "",
-  "author": "",
+  "description": "Second assignment of CS4241",
+  "author": "Owen Hart",
   "scripts": {
     "start": "node server.improved.js"
   },

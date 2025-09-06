@@ -10,9 +10,25 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   </head>
   <body>
-    <form>
-      <input type="text" id="yourname" value="your name here">
-      <button>submit</button>
+    <form id="todoForm">
+      <p>To Do Item</p>
+      <input type="text" id=todo placeholder="Enter To Do Item">
+      <p>Enter Creation Date Here</p>
+      <input type="date" id=todo2>
+      <p>Enter Deadline Here</p>
+      <input type="date" id=todo3>
+      <br>
+      <button id="submitButton">submit</button>
+      <p id="formMessage" style="color:red; font-weight:bold;"></p>
     </form>
+    <table id="todoTable">
+      <tr>
+        <th>To Do Item</th>
+        <th>Creation Date</th>
+        <th>Deadline Date</th>
+        <th>Priority</th>
+        <th>Action</th>
+      </tr>
+    </table>
   </body>
 </html>

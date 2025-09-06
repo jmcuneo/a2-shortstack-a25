@@ -8,46 +8,136 @@ const http = require( "http" ),
       dir  = "public/",
       port = 3000
 
-const appdata = [
-  { "model": "toyota", "year": 1999, "mpg": 23 },
-  { "model": "honda", "year": 2004, "mpg": 30 },
-  { "model": "ford", "year": 1987, "mpg": 14} 
-]
+// const appdata = [
+//   { "model": "toyota", "year": 1999, "mpg": 23 },
+//   { "model": "honda", "year": 2004, "mpg": 30 },
+//   { "model": "ford", "year": 1987, "mpg": 14}
+// ]
+
+let appdata = []
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
     handleGet( request, response )    
   }else if( request.method === "POST" ){
-    handlePost( request, response ) 
+    handlePost( request, response )
+  }else if( request.method === "DELETE" ){
+    handleDelete( request, response )
+  }else if( request.method === "PUT" ){
+    handleUpdate( request, response )
   }
 })
 
-const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
+// const handleGet = function( request, response ) {
+//   const filename = dir + request.url.slice( 1 )
+//
+//   if( request.url === "/" ) {
+//     sendFile( response, "public/index.html" )
+//   }else{
+//       sendFile( response, filename )
+//   }
+// }
 
-  if( request.url === "/" ) {
-    sendFile( response, "public/index.html" )
-  }else{
-    sendFile( response, filename )
+const handleGet = function(request, response) {
+  if (request.url === "/") {
+    sendFile(response, "public/index.html");
+  } else if (request.url === "/getTable") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(appdata)); // send whole array
+  } else {
+    const filename = dir + request.url.slice(1);
+    sendFile(response, filename);
   }
-}
+};
+
+const handleUpdate = function(request, response) {
+  let dataString = "";
+
+  request.on("data", function(data) {
+    dataString += data;
+  });
+
+  request.on("end", function() {
+    let parsed = JSON.parse(dataString);
+    appdata = appdata.map(item => {
+      const obj = JSON.parse(item);
+
+      // match the original todo
+      if (
+          obj.todo === parsed.original.todo &&
+          obj.creationDate === parsed.original.creationDate &&
+          obj.deadlineDate === parsed.original.deadlineDate
+      ) {
+        // replace with the updated todo
+        return JSON.stringify(parsed.updated);
+      }
+
+      return item; // leave unchanged
+    });
+
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(appdata));
+  });
+};
+
+
+// const handleGet = function(request, response) {
+//   const filename = dir + request.url.slice(1);
+//   console.log(filename)
+//   if (request.url === "/") {
+//     sendFile(response, "public/index.html");
+//   } else if (request.url === "/getTable") {
+//     // Send the appdata array back as JSON
+//     response.writeHead(200, { "Content-Type": "application/json" });
+//     response.end(JSON.stringify(appdata));
+//   } else {
+//     sendFile(response, filename);
+//   }
+// };
+
 
 const handlePost = function( request, response ) {
   let dataString = ""
 
   request.on( "data", function( data ) {
-      dataString += data 
+      dataString += data
   })
 
   request.on( "end", function() {
-    console.log( JSON.parse( dataString ) )
+    console.log( JSON.parse( dataString ))
+    appdata.push(dataString)
+    console.log("hi" + appdata)
 
-    // ... do something with the data here!!!
+    //updateTable(appdata)
 
-    response.writeHead( 200, "OK", {"Content-Type": "text/plain" })
-    response.end("test")
+    response.writeHead( 200, {"Content-Type": "application/json" })
+    response.end(JSON.stringify(appdata))
   })
 }
+
+const handleDelete = function(request, response) {
+  let dataString = "";
+
+  request.on("data", function(data) {
+     dataString += data;
+  });
+
+  request.on("end", function() {
+    let parsed = JSON.parse(dataString); // ✅ parse into object
+    appdata = appdata.filter(item => {
+      return !(
+          JSON.parse(item).todo === parsed.todo &&
+          JSON.parse(item).creationDate === parsed.creationDate &&
+          JSON.parse(item).deadlineDate === parsed.deadlineDate
+      );
+    });
+    console.log(appdata);
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(appdata));
+  })
+}
+
+
 
 const sendFile = function( response, filename ) {
    const type = mime.getType( filename ) 

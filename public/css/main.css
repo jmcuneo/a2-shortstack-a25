@@ -57,7 +57,7 @@ body {
 }
 
 /* Form paragraphs (labels) */
-#todoForm p {
+p {
   font-weight: 600;
   margin-bottom: 0.5rem;
   margin-top: 1.5rem;
@@ -65,7 +65,7 @@ body {
   font-size: 1.1rem;
 }
 
-#todoForm p:first-of-type {
+p:first-of-type {
   margin-top: 0;
 }
 
